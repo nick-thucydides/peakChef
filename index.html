@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peak chef</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --peak-blue: #4A7C9E;
+      --peak-teal: #5B9BA8;
+      --accent-warm: #D4A574;
+      --snow-white: #F8F9FA;
+      --charcoal: #2C3E50;
+      --slate: #556B7A;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    .section {
+      min-height: 100vh;
+      padding: 80px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(74, 124, 158, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(50px, 50px);
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, var(--peak-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: #aaaaaa;
+      margin-bottom: 40px;
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      color: var(--peak-teal);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 18px 40px;
+      background: var(--peak-blue);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 50px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(74, 124, 158, 0.4);
+      background: var(--peak-teal);
+    }
+
+    /* About Section */
+    .about {
+      background: #0f0f0f;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .placeholder-image {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, var(--slate) 0%, var(--charcoal) 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 1.1rem;
+      text-align: center;
+      padding: 20px;
+      border: 2px solid rgba(74, 124, 158, 0.2);
+    }
+
+    .text-content h2 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 30px;
+      font-weight: 900;
+    }
+
+    .text-content p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #cccccc;
+      margin-bottom: 20px;
+    }
+
+    .accent-line {
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--peak-blue), var(--peak-teal));
+      margin-bottom: 25px;
+    }
+
+    /* Brand Alignment Section */
+    .brand-alignment {
+      background: linear-gradient(135deg, var(--charcoal) 0%, #1a1a1a 100%);
+    }
+
+    .alignment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .alignment-card {
+      background: rgba(74, 124, 158, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      border: 2px solid rgba(74, 124, 158, 0.2);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .alignment-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--peak-teal);
+    }
+
+    .alignment-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .alignment-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--peak-teal);
+    }
+
+    .alignment-card p {
+      color: #cccccc;
+      line-height: 1.6;
+    }
+
+    /* Video Section */
+    .videos {
+      background: #0a0a0a;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .video-card {
+      background: #1a1a1a;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid rgba(74, 124, 158, 0.1);
+    }
+
+    .video-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(74, 124, 158, 0.2);
+      border-color: var(--peak-blue);
+    }
+
+    .video-placeholder {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(135deg, var(--slate) 0%, var(--charcoal) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 1rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .video-info {
+      padding: 30px;
+    }
+
+    .video-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .video-info p {
+      color: #aaaaaa;
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .stat {
+      flex: 1;
+      background: rgba(74, 124, 158, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid rgba(74, 124, 158, 0.2);
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--peak-teal);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 5px;
+    }
+
+    /* Analytics Section */
+    .analytics {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .metric-card {
+      background: rgba(74, 124, 158, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(74, 124, 158, 0.2);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--peak-teal);
+    }
+
+    .metric-number {
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff 0%, var(--peak-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .metric-label {
+      font-size: 1.1rem;
+      color: #aaaaaa;
+      margin-top: 10px;
+    }
+
+    .audience-box {
+      margin-top: 60px;
+      padding: 40px;
+      background: rgba(74, 124, 158, 0.1);
+      border-radius: 20px;
+      border: 2px solid rgba(74, 124, 158, 0.2);
+    }
+
+    .audience-box h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--peak-teal);
+    }
+
+    /* Team Section */
+    .team {
+      background: #0f0f0f;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .team-member {
+      text-align: center;
+    }
+
+    .team-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--slate) 0%, var(--charcoal) 100%);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      border: 3px solid rgba(74, 124, 158, 0.3);
+      transition: border-color 0.3s ease;
+    }
+
+    .team-member:hover .team-photo {
+      border-color: var(--peak-teal);
+    }
+
+    .team-member h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .team-member p {
+      color: #aaaaaa;
+      font-size: 1rem;
+    }
+
+    /* Creative Vision Section */
+    .creative-vision {
+      background: linear-gradient(135deg, var(--charcoal) 0%, #0a0a0a 100%);
+    }
+
+    .vision-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 60px;
+    }
+
+    .vision-image {
+      width: 100%;
+      height: 450px;
+      background: linear-gradient(135deg, var(--slate) 0%, var(--charcoal) 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      text-align: center;
+      padding: 20px;
+      border: 2px solid rgba(91, 155, 168, 0.3);
+    }
+
+    /* Sustainability Section */
+    .sustainability {
+      background: #0f0f0f;
+    }
+
+    .sustainability-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .sustainability-card {
+      background: rgba(91, 155, 168, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      border: 2px solid rgba(91, 155, 168, 0.2);
+    }
+
+    .sustainability-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--peak-teal);
+    }
+
+    /* Social Media Section */
+    .social-reach {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .platform-card {
+      background: rgba(74, 124, 158, 0.1);
+      padding: 35px;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px solid rgba(74, 124, 158, 0.2);
+    }
+
+    .platform-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: var(--peak-blue);
+    }
+
+    /* Production Quality Section */
+    .production {
+      background: #0f0f0f;
+    }
+
+    .equipment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .equipment-card {
+      background: rgba(74, 124, 158, 0.05);
+      padding: 35px;
+      border-radius: 20px;
+      border: 2px solid rgba(74, 124, 158, 0.15);
+    }
+
+    .equipment-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+
+    /* Partnership Section */
+    .partnership {
+      background: linear-gradient(135deg, #0a0a0a 0%, var(--charcoal) 100%);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .benefit-card {
+      background: rgba(74, 124, 158, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      border: 2px solid rgba(74, 124, 158, 0.2);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--peak-teal);
+    }
+
+    .benefit-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--peak-blue), var(--peak-teal));
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .benefit-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .benefit-card p {
+      color: #aaaaaa;
+      line-height: 1.6;
+    }
+
+    .ask-box {
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .ask-box h3 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    .ask-content {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(74, 124, 158, 0.1);
+      padding: 50px;
+      border-radius: 20px;
+      border: 2px solid rgba(74, 124, 158, 0.2);
+    }
+
+    /* Section Titles */
+    .section-title {
+      text-align: center;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.3rem;
+      color: #aaaaaa;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+
+      .about-content,
+      .vision-content {
+        grid-template-columns: 1fr;
+      }
+
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Hero Section -->
+  <section class="section hero">
+    <div class="container">
+      <div class="hero-tagline">give us money pls Max</div>
+      <h1>PEAK CHEF</h1>
+      <p>Partnership Proposal for Peak Performance</p>
+      <a href="#alignment" class="cta-button">Explore Our Vision</a>
+    </div>
+  </section>
+
+  <!-- Brand Alignment Section -->
+  <section class="section brand-alignment" id="alignment">
+    <div class="container">
+      <h2 class="section-title">Who else but us</h2>
+      <p class="section-subtitle">lets make some money together</p>
+
+      <div class="alignment-grid">
+        <div class="alignment-card">
+          <div class="alignment-icon">⛰️</div>
+          <h3>We Peak</h3>
+          <p>but we not even at the peak yet u feel me</p>
+        </div>
+        <div class="alignment-card">
+          <div class="alignment-icon">🎿</div>
+          <h3>We perform</h3>
+          <p>skier emoji </p>
+        </div>
+
+        <div class="alignment-card">
+          <div class="alignment-icon">🎯</div>
+          <h3>Performance (peak)</h3>
+          <p>she see me pull up in peak and she start erforming</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section about">
+    <div class="container">
+      <div class="about-content">
+        <div class="placeholder-image">
+          photo of the fellas
+        </div>
+        <div class="text-content">
+          <div class="accent-line"></div>
+          <h2>Who We Are</h2>
+          <p>whole gang of savages we been grinding long time, kinda crazy no one sent us 5 bands yet whats the hurry
+          </p>
+          <p>photos and interviews in magazine, well known on youtube, u get the vibes we up</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Project -->
+  <section class="section videos">
+    <div class="container">
+      <h2 class="section-title">Our Latest Project: Third party</h2>
+      <p class="section-subtitle">3 years 3 videos lets make another one fr</p>
+
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-placeholder">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/PMMf2hkm1IA?si=MQtsO0b0-Y6giyPs"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="video-info">
+            <h3>Third Party</h3>
+            <p>[Brief description of the project, locations, highlights, what went into making it]</p>
+            <div class="stats">
+              <div class="stat">
+                <div class="stat-number">67</div>
+                <div class="stat-label">Views</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">420</div>
+                <div class="stat-label">Likes</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">33%</div>
+                <div class="stat-label">Engagement</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Previous Work -->
+  <section class="section videos" style="background: #0f0f0f;">
+    <div class="container">
+      <h2 class="section-title">Previous Work</h2>
+      <p class="section-subtitle">Showcasing our evolution and consistency in creating premium ski content</p>
+
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-placeholder">
+            Embed last year's project here
+          </div>
+          <div class="video-info">
+            <h3>[Project Title - Year]</h3>
+            <p>[Description and stats]</p>
+            <div class="stats">
+              <div class="stat">
+                <div class="stat-number">[XXX]</div>
+                <div class="stat-label">Views</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">[XXX]</div>
+                <div class="stat-label">Likes</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-placeholder">
+            Embed another project here
+          </div>
+          <div class="video-info">
+            <h3>[Project Title - Year]</h3>
+            <p>[Description and stats]</p>
+            <div class="stats">
+              <div class="stat">
+                <div class="stat-number">[XXX]</div>
+                <div class="stat-label">Views</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">[XXX]</div>
+                <div class="stat-label">Likes</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Analytics -->
+  <section class="section analytics">
+    <div class="container">
+      <h2 class="section-title">By The Numbers</h2>
+      <p class="section-subtitle">Our reach and engagement metrics demonstrate consistent growth and audience loyalty
+      </p>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-number">[X.XM]</div>
+          <div class="metric-label">Total Views</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number">[XXK]</div>
+          <div class="metric-label">Subscribers</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number">[XX%]</div>
+          <div class="metric-label">Avg Watch Time</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number">[XX%]</div>
+          <div class="metric-label">YoY Growth</div>
+        </div>
+      </div>
+
+      <div class="audience-box">
+        <h3>Audience Demographics</h3>
+        <p style="color: #aaaaaa; line-height: 1.8;">
+          [Insert details about your audience - age ranges (align with Peak Performance's 25-45 target demographic),
+          geographic locations (especially Scandinavia, Alps, North America), interests (outdoor sports, sustainability,
+          premium gear), other channels they watch, lifestyle characteristics. Show that your audience aligns with Peak
+          Performance's target market of discerning outdoor enthusiasts who value quality and understated style]
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media Reach -->
+  <section class="section social-reach">
+    <div class="container">
+      <h2 class="section-title">Cross-Platform Reach</h2>
+      <p class="section-subtitle">Building community beyond YouTube</p>
+
+      <div class="platform-grid">
+        <div class="platform-card">
+          <h3>Instagram</h3>
+          <div class="metric-number" style="font-size: 2rem;">[XXK]</div>
+          <div class="metric-label">Followers</div>
+          <p style="color: #aaaaaa; margin-top: 15px; font-size: 0.95rem;">[Engagement rate, story views, reels
+            performance]</p>
+        </div>
+        <div class="platform-card">
+          <h3>TikTok</h3>
+          <div class="metric-number" style="font-size: 2rem;">[XXK]</div>
+          <div class="metric-label">Followers</div>
+          <p style="color: #aaaaaa; margin-top: 15px; font-size: 0.95rem;">[Avg views per video, viral content examples]
+          </p>
+        </div>
+        <div class="platform-card">
+          <h3>Other Platforms</h3>
+          <div class="metric-number" style="font-size: 2rem;">[XXK]</div>
+          <div class="metric-label">Combined Reach</div>
+          <p style="color: #aaaaaa; margin-top: 15px; font-size: 0.95rem;">[Vimeo, Facebook, website traffic,
+            newsletter]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Creative Vision -->
+  <section class="section creative-vision">
+    <div class="container">
+      <h2 class="section-title">Our Creative Approach</h2>
+      <div class="accent-line" style="margin: 0 auto 40px;"></div>
+
+      <div class="vision-content">
+        <div class="text-content">
+          <h3 style="font-size: 2rem; margin-bottom: 20px; color: var(--peak-teal);">Minimalist Storytelling</h3>
+          <p>[Describe your filming and editing philosophy - how you let the skiing and landscape speak for itself, use
+            of natural light, patient cinematography, emphasis on genuine moments over manufactured drama. Connect this
+            to Peak Performance's Scandinavian design principles]</p>
+          <p style="margin-top: 20px;">[Talk about your color grading approach, sound design choices, pacing - all
+            reflecting that "less is more" aesthetic]</p>
+        </div>
+        <div class="vision-image">
+          Replace with behind-the-scenes photo or mood board showcasing your visual style
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Production Quality -->
+  <section class="section production">
+    <div class="container">
+      <h2 class="section-title">Production Capabilities</h2>
+      <p class="section-subtitle">Professional-grade equipment and expertise to deliver premium content</p>
+
+      <div class="equipment-grid">
+        <div class="equipment-card">
+          <h3>Camera Equipment</h3>
+          <p style="color: #aaaaaa; line-height: 1.6;">[List your cameras, lenses, stabilization gear - RED, Sony,
+            Canon, gimbals, drones, etc. Emphasize 4K/6K/8K capabilities]</p>
+        </div>
+        <div class="equipment-card">
+          <h3>Post-Production</h3>
+          <p style="color: #aaaaaa; line-height: 1.6;">[Detail your editing setup - software (Premiere, Resolve, Final
+            Cut), color grading expertise, sound design capabilities]</p>
+        </div>
+        <div class="equipment-card">
+          <h3>Backcountry Access</h3>
+          <p style="color: #aaaaaa; line-height: 1.6;">[Mention safety certifications, avalanche training, local
+            knowledge of filming locations, ability to access remote terrain]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section team">
+    <div class="container">
+      <h2 class="section-title">The Crew</h2>
+      <p class="section-subtitle">Meet the athletes and creatives behind the lens</p>
+
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="team-photo">Photo</div>
+          <h3>[Name]</h3>
+          <p style="color: var(--peak-teal); font-weight: 600;">[Role - e.g., Skier / Cinematographer]</p>
+          <p style="margin-top: 10px; font-size: 0.9rem;">[Brief bio or notable achievements]</p>
+        </div>
+        <div class="team-member">
+          <div class="team-photo">Photo</div>
+          <h3>[Name]</h3>
+          <p style="color: var(--peak-teal); font-weight: 600;">[Role]</p>
+          <p style="margin-top: 10px; font-size: 0.9rem;">[Brief bio]</p>
+        </div>
+        <div class="team-member">
+          <div class="team-photo">Photo</div>
+          <h3>[Name]</h3>
+          <p style="color: var(--peak-teal); font-weight: 600;">[Role]</p>
+          <p style="margin-top: 10px; font-size: 0.9rem;">[Brief bio]</p>
+        </div>
+        <div class="team-member">
+          <div class="team-photo">Photo</div>
+          <h3>[Name]</h3>
+          <p style="color: var(--peak-teal); font-weight: 600;">[Role]</p>
+          <p style="margin-top: 10px; font-size: 0.9rem;">[Brief bio]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sustainability Section -->
+  <section class="section sustainability">
+    <div class="container">
+      <h2 class="section-title">Sustainability Commitment</h2>
+      <p class="section-subtitle">Aligning with Peak Performance's environmental values</p>
+
+      <div class="sustainability-grid">
+        <div class="sustainability-card">
+          <h3>Low-Impact Filming</h3>
+          <p style="color: #aaaaaa; line-height: 1.6;">[Describe your approach to minimizing environmental impact during
+            shoots - carpooling, avoiding helicopter use when possible, staying on established routes, leaving no trace
+            principles]</p>
+        </div>
+        <div class="sustainability-card">
+          <h3>Local Focus</h3>
+          <p style="color: #aaaaaa; line-height: 1.6;">[Emphasize filming in nearby mountains to reduce travel
+            emissions, supporting local communities, highlighting accessible terrain rather than always chasing exotic
+            locations]</p>
+        </div>
+        <div class="sustainability-card">
+          <h3>Educational Content</h3>
+          <p style="color: #aaaaaa; line-height: 1.6;">[Plans to include messaging about climate change, avalanche
+            safety education, responsible backcountry ethics - content that gives back to the community]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partnership Vision -->
+  <section class="section partnership">
+    <div class="container">
+      <h2 class="section-title">Partnership Vision</h2>
+      <p class="section-subtitle">How we'll amplify Peak Performance's brand through authentic storytelling</p>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">🎥</div>
+          <h3>Content Creation</h3>
+          <p>[Describe the video project(s) you want to create - specific locations (Alps, Scandinavia, North America),
+            filming style, expected deliverables (main film + social cuts + BTS), timeline. Mention how gear will be
+            naturally integrated]</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">👕</div>
+          <h3>Authentic Brand Integration</h3>
+          <p>[Explain how you'll showcase Peak Performance products naturally - wearing the gear because it performs,
+            not just for sponsorship. Subtle product placement that fits the minimalist aesthetic]</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🌍</div>
+          <h3>Multi-Platform Distribution</h3>
+          <p>[Detail the exposure Peak Performance will get - YouTube premiere, Instagram teasers, TikTok cuts,
+            behind-the-scenes content, potential festival submissions, total projected reach]</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📸</div>
+          <h3>Content Library</h3>
+          <p>[Offer to provide Peak Performance with raw footage, stills, and shorter cuts they can use for their own
+            marketing channels - adding value beyond the main film]</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🤝</div>
+          <h3>Long-term Partnership</h3>
+          <p>[Outline your vision for an ongoing relationship - multiple films per season, social media takeovers, event
+            coverage, athlete development program, growing together over years]</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🎯</div>
+          <h3>Target Audience Alignment</h3>
+          <p>[Emphasize how your audience matches Peak Performance's demographic perfectly - serious skiers who invest
+            in quality gear, value minimalist design, care about sustainability]</p>
+        </div>
+      </div>
+
+      <div class="ask-box">
+        <h3>What We're Asking For</h3>
+        <div class="ask-content">
+          <p style="color: #cccccc; font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
+            [Detail your funding request - be specific about budget, what it covers (travel to specific locations,
+            accommodation, lift tickets/touring permits, equipment rentals if needed, post-production costs), and what
+            Peak Performance will receive in return]
+          </p>
+          <p style="color: #aaaaaa; font-size: 1rem; line-height: 1.6; margin-bottom: 25px;">
+            [Add any additional asks - gear from upcoming collection for crew to test and wear in film, access to Peak
+            Performance events or athlete network, introductions to retailers or other brands]
+          </p>
+          <div
+            style="background: rgba(91, 155, 168, 0.1); padding: 30px; border-radius: 15px; border: 2px solid rgba(91, 155, 168, 0.3); margin-top: 30px;">
+            <h4 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--peak-teal);">Proposed Timeline</h4>
+            <p style="color: #aaaaaa; line-height: 1.6;">
+              [Outline your production schedule - filming dates, editing timeline, release date. Show you're organized
+              and professional]
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 80px; text-align: center;">
+        <h3 style="font-size: 2rem; margin-bottom: 20px;">Let's Create Something Timeless</h3>
+        <p
+          style="color: #aaaaaa; font-size: 1.2rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Ready to discuss how we can elevate Peak Performance's presence in the freeride community?
+        </p>
+        <a href="mailto:your-email@example.com" class="cta-button">Get In Touch</a>
+        <p style="color: #888; font-size: 0.9rem; margin-top: 25px;">
+          [Your Name] | [Your Email] | [Your Phone]<br>
+          [Social Media Handles]
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const sections = document.querySelectorAll('.section');
+
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
