@@ -90,6 +90,44 @@
       overflow: hidden;
     }
 
+    .final {
+      text-align: center;
+      /* position: relative;
+      overflow: hidden;
+      background-image: url('photos/alexleifbw.jpg');
+      /* path to your image */
+      background-size: 100%;
+      /* zooms to fill the section */
+      background-position: 0% 40%;
+      /* x/y position, can use pixels or % */
+      background-repeat: no-repeat;
+      /* prevent tiling */
+      height: 0px;
+      /* adjust height as needed */
+      position: relative;
+      /* if you want content on top */
+      overflow: hidden;
+
+    }
+
+    .ask {
+      position: relative;
+      overflow: hidden;
+      background-image: url('photos/floydbw.jpg');
+      /* path to your image */
+      background-size: 100%;
+      /* zooms to fill the section */
+      background-position: 0% 40%;
+      /* x/y position, can use pixels or % */
+      background-repeat: no-repeat;
+      /* prevent tiling */
+      height: 0px;
+      /* adjust height as needed */
+      position: relative;
+      /* if you want content on top */
+      overflow: hidden;
+    }
+
 
     .hero::before {
       content: '';
@@ -220,10 +258,10 @@
       transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
-    .alignment-card:hover {
+    /* .alignment-card:hover {
       transform: translateY(-5px);
       border-color: #6a6a6a;
-    }
+    } */
 
     .alignment-card h3 {
       font-size: 1.5rem;
@@ -337,10 +375,10 @@
       transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
-    .metric-card:hover {
+    /* .metric-card:hover {
       transform: translateY(-5px);
       border-color: #6a6a6a;
-    }
+    } */
 
     .metric-number {
       font-size: 3rem;
@@ -400,9 +438,9 @@
       transition: border-color 0.3s ease;
     }
 
-    .team-member:hover .team-photo {
+    /* .team-member:hover .team-photo {
       border-color: #6a6a6a;
-    }
+    } */
 
     .team-member h3 {
       font-size: 1.5rem;
@@ -481,10 +519,10 @@
       transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
-    .benefit-card:hover {
+    /* .benefit-card:hover {
       transform: translateY(-5px);
       border-color: #6a6a6a;
-    }
+    } */
 
     .benefit-card h3 {
       font-size: 1.5rem;
@@ -509,7 +547,7 @@
     .ask-content {
       max-width: 800px;
       margin: 0 auto;
-      background: rgba(74, 74, 74, 0.1);
+      background: rgba(18, 18, 18, 0.90);
       padding: 50px;
       border-radius: 20px;
       border: 2px solid rgba(74, 74, 74, 0.2);
@@ -848,7 +886,7 @@
             content over overproduced spectacle.</p>
         </div>
         <div class="vision-image">
-          <img src="photos/quad.jpg"
+          <img src="photos/alex.jpg"
             style="width: 100%; height: 100%; object-fit:cover; transform: scale(1); border-radius: 0px; object-position: 50% 40%;">
         </div>
       </div>
@@ -1037,10 +1075,13 @@
   </section>
 
 
-  <section class="section">
+  <section class="section ask">
     <div class="container">
+      <h2 class="section-title">What We're Asking For</h2>
       <div class="ask-box">
-        <h3>What We're Asking For</h3>
+
+        <br>
+        <br>
 
         <div class="ask-content">
           <p style="color: #cccccc; font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
@@ -1069,11 +1110,11 @@
 
   <section class="section final">
     <div class="container">
-      <h2 class="section-title">Thanks for reading</h2>
+      <h2 class="section-title">Thank You</h2>
       <div class="accent-line" style="margin: 0 auto 40px;"></div>
 
-      <div class="vision-content">
-        <div class="text-content">
+      <div class="">
+        <div class="text-content metric-card">
           <h3 style="font-size: 2rem; margin-bottom: 20px; color: var(--peak-teal);"></h3>
           <p>We appreciate you taking the time to read this proposal. We would only ever make a proposal to a brand
             whose quality we stand behind and whose values align
